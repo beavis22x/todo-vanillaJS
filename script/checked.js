@@ -1,15 +1,12 @@
-const checkboxes = document.querySelectorAll('input:checked' ),
-      todosList = document.querySelectorAll('.todos-item input[checked]');
+const checkboxWrapper = document.querySelector('.todos-list');
 
-let DOMContentLoaded;
+console.log(checkboxWrapper)
 
-
-todosList.forEach(item => {
-    item.addEventListener('click', (e) => {
-        console.log('!!!!!!');
-    })
-    // console.log(item)
+checkboxWrapper.addEventListener('click', (e) => {
+    //wait click event in any checkbox
+    if(e.target && e.target.matches('input[type=checkbox]')) {
+        e.target.setAttribute('disabled', 'disabled')
+        const currentTitle = e.target.nextElementSibling; // the title of the corresponding checkbox
+        currentTitle.classList.add('crosstext');
+    }
 })
-setTimeout(()=> {
-    console.log(checkboxes);
-}, 5000)
