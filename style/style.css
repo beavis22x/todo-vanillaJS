@@ -47,3 +47,6 @@ body {
     color: black;
 }
 
+.crosstext {
+    text-decoration: line-through;
+}
