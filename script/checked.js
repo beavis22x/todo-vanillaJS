@@ -1,7 +1,5 @@
 const checkboxWrapper = document.querySelector('.todos-list');
 
-console.log(checkboxWrapper)
-
 checkboxWrapper.addEventListener('click', (e) => {
     //wait click event in any checkbox
     if(e.target && e.target.matches('input[type=checkbox]')) {
