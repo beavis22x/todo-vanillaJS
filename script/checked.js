@@ -8,3 +8,4 @@ checkboxWrapper.addEventListener('click', (e) => {
         currentTitle.classList.add('crosstext');
     }
 })
+
