@@ -8,9 +8,35 @@
     <link rel="stylesheet" href="style/style.css"/>
 </head>
 <body>
+<div class='modal-container'>
+    <div class='modal'>
+        <h2 class='modal-header'>Create task</h2>
+        <form action='#' class='modal-form'>
+            <div class='modal-title'>
+                <label for='form-title'>Title</label>
+                <input id='form-title' type='text'>
+            </div>
+            <div class='modal-start-time'>
+                <label for='form-start'>Start time</label>
+                <input id='form-start' type='datetime-local'>
+            </div>
+            <div class='modal-end-time'>
+                <label for='form-end'>End time</label>
+                <input id='form-end' type='datetime-local'>
+            </div>
+            <div class='modal-buttons'>
+                <button id='modal-close'>Close</button>
+                <button type='submit'>Create</button>
+            </div>
+        </form>
+    </div>
+</div>
 <main class='main'>
     <section class='header'>
         <h1>ToDo List</h1>
+    </section>
+    <section class='buttons'>
+        <button class='add-task-btn' id='modal-open'>Add Task</button>
     </section>
     <section class='todos-list'>
         <article class='todos-header'>
@@ -25,56 +51,33 @@
                 <span>End time</span>
             </div>
         </article>
-        <article class='todos-item'>
-            <input type='checkbox' checked>
+
+        <article class='todos-item' id='1'>
+            <input type='checkbox'>
             <div class='title'>
                 <span>Buy milk</span>
             </div>
             <div class='start-time'>
-                <span>12.12.12</span>
+                <span>20-01-2022</span>
             </div>
             <div class='end-time'>
-                <span>23.23.23</span>
+                <span>21-01-2022</span>
             </div>
         </article>
-        <article class='todos-item'>
-            <input type='checkbox' checked>
+        <article class='todos-item' id='2'>
+            <input type='checkbox'>
             <div class='title'>
-                <span>Buy milk</span>
+                <span>Buy bread</span>
             </div>
             <div class='start-time'>
-                <span>12.12.12</span>
+                <span>21-01-2022</span>
             </div>
             <div class='end-time'>
-                <span>23.23.23</span>
-            </div>
-        </article>
-        <article class='todos-item'>
-            <input type='checkbox' checked>
-            <div class='title'>
-                <span>Buy milk</span>
-            </div>
-            <div class='start-time'>
-                <span>12.12.12</span>
-            </div>
-            <div class='end-time'>
-                <span>23.23.23</span>
-            </div>
-        </article>
-        <article class='todos-item'>
-            <input type='checkbox' checked>
-            <div class='title'>
-                <span>Buy milk</span>
-            </div>
-            <div class='start-time'>
-                <span>12.12.12</span>
-            </div>
-            <div class='end-time'>
-                <span>23.23.23</span>
+                <span>22-01-2022</span>
             </div>
         </article>
     </section>
 </main>
 </body>
-<script src='script/checked.js'></script>
+<script type="module" src='script/main.js'></script>
 </html>
