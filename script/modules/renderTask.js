@@ -1,6 +1,6 @@
-import {listItems} from '../app.js';
+import { listItems } from '../app.js';
 
-export const render = function renderTask(id, title, start, end) {
+export const render = function renderTask({id, title, start, end}) {
     const elementItem = document.createElement('div')
 
     elementItem.innerHTML = `

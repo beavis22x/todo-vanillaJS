@@ -1,6 +1,6 @@
-import {createTaskObj} from './modules/createTask.js';
-import {defaultTime} from './modules/setTime.js';
-import {crossTitle} from './modules/completedTask.js';
+import { createTaskObj } from './modules/createTask.js';
+import { defaultTime } from './modules/setTime.js';
+import { crossTitle } from './modules/completedTask.js';
 
 export const listItems = document.querySelector('.todos-list');
 const formTitle = document.querySelector('#form-title');
@@ -38,8 +38,8 @@ export const app = function app() {
         openModalBtn.addEventListener('click', (e) => {
             modalContainer.classList.add("show");
             formTitle.value = '';
-            defaultTime(formStartField);
-            defaultTime(formEndField);
+            formStartField.value = defaultTime(formStartField);
+            formEndField.value =  defaultTime(formEndField);
         });
 
         checkboxWrapper.addEventListener('click', crossTitle);
@@ -47,7 +47,7 @@ export const app = function app() {
         closeModalBtn.addEventListener('click', closeModalFunc)
 
         form.addEventListener('submit', (e) => {
-            createTaskObj(e, taskList, formTitle, formEndField, formStartField, closeModalFunc)
+            createTaskObj({e, taskList, formTitle, formEndField, formStartField, closeModalFunc})
         })
 
     })
