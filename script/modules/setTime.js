@@ -12,5 +12,5 @@ export const defaultTime = function setTime(element) {
     const offset = date.getTimezoneOffset() * msInMinute;
     const adjustedDate = new Date(date.getTime() - offset);
     const formattedDate = adjustedDate.toISOString().substring(0, 16);
-    return formattedDate
+    return formattedDate;
 }

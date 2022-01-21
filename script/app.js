@@ -43,9 +43,7 @@ export const app = function app() {
         });
 
         checkboxWrapper.addEventListener('click', crossTitle);
-
         closeModalBtn.addEventListener('click', closeModalFunc)
-
         form.addEventListener('submit', (e) => {
             createTaskObj({e, taskList, formTitle, formEndField, formStartField, closeModalFunc})
         })

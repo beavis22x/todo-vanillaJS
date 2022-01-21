@@ -3,6 +3,7 @@ import { render } from './renderTask.js';
 const formattingTime = (str) => {
     let time = str.slice(0, 10)
     time = `${time.slice(8, 10)}-${time.slice(5, 7)}-${time.slice(0, 4)}`
+
     return time
 }
 
@@ -23,9 +24,7 @@ export const createTaskObj = function addTask({e, taskList, formTitle, formEndFi
 
     taskList.push(taskObj);
     taskId++;
-
     render({id, title, start, end});
-
     closeModalFunc(e)
 }
 
