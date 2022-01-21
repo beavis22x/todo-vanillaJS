@@ -44,21 +44,13 @@ button {
     padding: 10px;
 }
 
-.todos-header {
-    font-weight: bold;
-}
+.todos-header { font-weight: bold; }
 
-.todos-list {
-    color: black;
-}
+.todos-list { color: black; }
 
-.crosstext {
-    text-decoration: line-through;
-}
+.crosstext { text-decoration: line-through; }
 
-.buttons {
-    margin: 0 auto;
-}
+.buttons { margin: 0 auto; }
 
 .add-task-btn {
     width: 100px;
@@ -68,20 +60,18 @@ button {
     height: 30px;
 }
 
-button:hover {
-    opacity: 0.7;
-}
+button:hover { opacity: 0.7; }
 
 .modal-container{
-    opacity: 0;
-    pointer-events: none;
     position: fixed;
-    background-color: rgba(0, 0, 0, 0.3);
+    display:flex;
     height: 100vh;
     width: 100vw;
-    display:flex;
     justify-content: center;
     align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    background-color: rgba(0, 0, 0, 0.3);
     transition: opacity 0.4s ;
 }
 
@@ -94,7 +84,6 @@ button:hover {
     display: grid;
     grid-gap: 20px;
     width: 400px;
-    /*min-width: 100%;*/
     padding: 20px;
     background-color: #BBDEF0;
 }
@@ -113,5 +102,4 @@ button:hover {
 .modal-buttons button{
     padding: 5px;
     background-color: #00A6A6;
-
 }
