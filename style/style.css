@@ -35,7 +35,7 @@ button {
 
 .todos-header, .todos-item {
     display: grid;
-    grid-template-columns: 10% 30% 30% 30%;
+    grid-template-columns: 10% 25% 25% 25% 15%;
     border: #73d7ce solid 2px;
     border-radius: 20px;
     margin: 0 0 10px;
@@ -45,6 +45,7 @@ button {
 }
 
 .todos-header { font-weight: bold; }
+
 
 .todos-list { color: black; }
 
@@ -100,6 +101,14 @@ button:hover { opacity: 0.7; }
 }
 
 .modal-buttons button{
-    padding: 5px;
+    padding: 3px 8px;
     background-color: #00A6A6;
+}
+
+.delete-item-btn {
+    padding: 3px 7px;
+    border-radius: 50%;
+    font-weight: bold;
+    background-color: #00A6A6;
+    color: #eae7e6;
 }

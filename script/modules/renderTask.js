@@ -1,4 +1,4 @@
-import { listItems } from '../app.js';
+import {listItems} from '../app.js';
 
 export const render = function renderTask({id, title, start, end}) {
     const elementItem = document.createElement('div')
@@ -14,6 +14,9 @@ export const render = function renderTask({id, title, start, end}) {
                 </div>
                 <div class='end-time'>
                     <span>${end}</span>
+                </div>
+                <div class='item-buttons'>
+                    <button class='delete-item-btn'>X</button>
                 </div>
             </article>
         `;
