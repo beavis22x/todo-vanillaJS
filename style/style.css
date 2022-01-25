@@ -105,10 +105,14 @@ button:hover { opacity: 0.7; }
     background-color: #00A6A6;
 }
 
-.delete-item-btn {
+.delete-item-btn, .edit-item-btn {
     padding: 3px 7px;
     border-radius: 50%;
     font-weight: bold;
     background-color: #00A6A6;
     color: #eae7e6;
+}
+
+.edit-item-btn {
+    border-radius: 25%;
 }

@@ -1,6 +1,6 @@
 import {listItems} from '../app.js';
 
-export const render = function renderTask({id, title, start, end}) {
+export const render = function renderTask({e, id, title, start, end, addSelector, edit}) {
     const elementItem = document.createElement('div')
 
     elementItem.innerHTML = `
@@ -16,9 +16,19 @@ export const render = function renderTask({id, title, start, end}) {
                     <span>${end}</span>
                 </div>
                 <div class='item-buttons'>
+                    <button class='edit-item-btn'>Edit</button>
                     <button class='delete-item-btn'>X</button>
                 </div>
             </article>
         `;
-    listItems.append(elementItem)
+
+    if(edit) {
+        addSelector.parentNode.after(elementItem) //addSelector.nextSibling.insertAdjacentHTML('beforebegin', elementItem)
+                                        // addSelector.parentNode.remove()
+        addSelector.parentNode.remove()
+        console.log(addSelector.parentNode)
+        console.log(addSelector)
+    } else {
+        listItems.append(elementItem);
+    }
 }

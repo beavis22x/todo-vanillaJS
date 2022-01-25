@@ -1,30 +1,40 @@
 import { render } from './renderTask.js';
+import { listItems } from '../app.js';
 
 let taskId = 1;
 
-const formattingTime = (str) => {
-    let time = str.slice(0, 10)
-    time = `${time.slice(8, 10)}-${time.slice(5, 7)}-${time.slice(0, 4)}`
+// const formattingTime = (str) => {
+//     let time = str.slice(0, 10)
+//     time = `${time.slice(8, 10)}-${time.slice(5, 7)}-${time.slice(0, 4)}`
+//
+//     return time
+// }
 
-    return time
-}
-
-export const createTaskObj = function addTask({e, formTitle, formEndField, taskList, formStartField, taskListRender, closeModalFunc}) {
+export const createTaskObj = function addTask({e, formTitle, formEndField, formStartField, closeModalFunc, editMode, selector}) {
+    let addSelector = listItems;
     const id = taskId;
+    const edit = editMode;
     const title = formTitle.value;
-    const start = formattingTime(formStartField.value);
-    const end = formattingTime(formEndField.value);
+    const start = formStartField.value      // formattingTime(formStartField.value);
+    const end = formEndField.value //formattingTime(formEndField.value);
     const taskObj = {
         id,
         title,
         start,
         end,
         completed: false,
-        editMode:false,
+        edit,
     };
-    taskList.push(taskObj)
+
+    if(edit) {
+        addSelector = selector
+        render({e, id, title, start, end, addSelector, edit});
+    } else {
+    }
+    // taskList.push(taskObj)
     taskId++;
-    render({id, title, start, end});
+    render({e, id, title, start, end, addSelector, edit});
     closeModalFunc(e)
+
 }
 
