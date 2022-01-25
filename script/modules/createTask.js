@@ -1,5 +1,7 @@
 import { render } from './renderTask.js';
 
+let taskId = 1;
+
 const formattingTime = (str) => {
     let time = str.slice(0, 10)
     time = `${time.slice(8, 10)}-${time.slice(5, 7)}-${time.slice(0, 4)}`
@@ -7,9 +9,7 @@ const formattingTime = (str) => {
     return time
 }
 
-let taskId = 3;
-
-export const createTaskObj = function addTask({e, taskList, formTitle, formEndField, formStartField, closeModalFunc}) {
+export const createTaskObj = function addTask({e, formTitle, formEndField, taskList, setTaskList, formStartField, taskListRender, closeModalFunc}) {
     const id = taskId;
     const title = formTitle.value;
     const start = formattingTime(formStartField.value);
@@ -19,12 +19,14 @@ export const createTaskObj = function addTask({e, taskList, formTitle, formEndFi
         title,
         start,
         end,
-        completed: false
+        completed: false,
+        editMode:false,
     };
 
-    taskList.push(taskObj);
+    if(title === '') return closeModalFunc(e)
+
+    setTaskList([...taskList(),taskObj])
     taskId++;
-    render({id, title, start, end});
     closeModalFunc(e)
 }
 

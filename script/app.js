@@ -1,6 +1,8 @@
 import { createTaskObj } from './modules/createTask.js';
 import { defaultTime } from './modules/setTime.js';
 import { crossTitle } from './modules/completedTask.js';
+import { removeTask } from './modules/removeTask.js';
+import {render} from './modules/renderTask.js';
 
 export const listItems = document.querySelector('.todos-list');
 const formTitle = document.querySelector('#form-title');
@@ -9,27 +11,31 @@ const formEndField = document.querySelector('#form-end');
 const openModalBtn = document.querySelector('#modal-open');
 const closeModalBtn = document.querySelector('#modal-close');
 const modalContainer = document.querySelector('.modal-container');
-const checkboxWrapper = document.querySelector('.todos-list');
+const taskListContainer = document.querySelector('.todos-list');
 const form = document.querySelector('.modal-form');
-const taskList = [
-    {
-        id: 1,
-        title: 'Buy milk',
-        start: '20-01-2022',
-        end: '21-01-2022',
-        completed: false
-    },
-    {
-        id: 2,
-        title: 'Buy bread',
-        start: '21-01-2022',
-        end: '22-01-2022',
-        completed: false
-    }];
+
+const useState = (defaultValue) => {
+    let value = defaultValue;
+    const getValue = () => value
+    const setValue = newValue => value = newValue
+
+    return [getValue, setValue];
+}
+
+const [taskList, setTaskList] = useState([]);
 
 const closeModalFunc = (e) => {
     e.preventDefault();
     modalContainer.classList.remove("show")
+}
+
+const renderTaskList = () => {
+    while (listItems.children.length > 1) {
+        listItems.removeChild(listItems.lastChild);
+    }
+    taskList().map(item => {
+        render(item);
+    })
 }
 
 export const app = function app() {
@@ -42,10 +48,12 @@ export const app = function app() {
             formEndField.value =  defaultTime(formEndField);
         });
 
-        checkboxWrapper.addEventListener('click', crossTitle);
+        taskListContainer.addEventListener('click', (e) => removeTask({e, taskList, setTaskList, renderTaskList}))
+        taskListContainer.addEventListener('click', crossTitle);
         closeModalBtn.addEventListener('click', closeModalFunc)
         form.addEventListener('submit', (e) => {
-            createTaskObj({e, taskList, formTitle, formEndField, formStartField, closeModalFunc})
+            createTaskObj({e, formTitle, formEndField, formStartField, taskList, setTaskList, closeModalFunc})
+            renderTaskList()
         })
 
     })
