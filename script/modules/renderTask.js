@@ -22,13 +22,13 @@ export const render = function renderTask({e, id, title, start, end, addSelector
             </article>
         `;
 
-    if(edit) {
-        addSelector.parentNode.after(elementItem) //addSelector.nextSibling.insertAdjacentHTML('beforebegin', elementItem)
-                                        // addSelector.parentNode.remove()
-        addSelector.parentNode.remove()
-        console.log(addSelector.parentNode)
-        console.log(addSelector)
-    } else {
+    // if(edit) {
+    //     addSelector.parentNode.after(elementItem) //addSelector.nextSibling.insertAdjacentHTML('beforebegin', elementItem)
+    //                                     // addSelector.parentNode.remove()
+    //     addSelector.parentNode.remove()
+    //     console.log(addSelector.parentNode)
+    //     console.log(addSelector)
+    // } else {
         listItems.append(elementItem);
-    }
+    // }
 }

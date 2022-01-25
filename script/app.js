@@ -3,6 +3,7 @@ import { defaultTime } from './modules/setTime.js';
 import { crossTitle } from './modules/completedTask.js';
 import { removeTask } from './modules/removeTask.js';
 import { editTask } from './modules/editTask.js';
+import {render} from './modules/renderTask.js';
 
 export const listItems = document.querySelector('.todos-list');
 const formTitle = document.querySelector('#form-title');
@@ -14,75 +15,49 @@ const modalContainer = document.querySelector('.modal-container');
 const taskListContainer = document.querySelector('.todos-list');
 const taskListHeader = document.querySelector('article.todos-header');
 const form = document.querySelector('.modal-form');
-// const taskList = [];
-let editMode = false;
 
-export const closeModalFunc = (e) => {
+const useState = (defaultValue) => {
+    let value = defaultValue;
+    const getValue = () => value
+    const setValue = newValue => value = newValue
+    return [getValue, setValue];
+}
+
+const [taskList, setTaskList] = useState([]);
+
+const closeModalFunc = (e) => {
     e.preventDefault();
     modalContainer.classList.remove("show")
-    formTitle.value = ''
 }
 
-let start = defaultTime(formStartField)
-let end = defaultTime(formEndField)
-let title = ''
-
-
-const openModalFunc = ({e, title, start , end, editMode}) => {
-    console.log( e.target.matches('button.edit-item-btn'))
-
-    // if(e.target.matches('button.edit-item-btn')) {
-    //     editMode = true;
-    //     title = formTitle.value;
-    //     start = formStartField.value;
-    //     end = formEndField.value
-    //     modalContainer.classList.add("show");
-    //     console.log( title, start, end)
-    //
-    // }
-
-    console.log(title, start, end)
-        formTitle.value  = title;
-        formStartField.value = start;
-        formEndField.value =  end;
-        modalContainer.classList.add("show");
-}
-
-
-const editModalFunc = ({e, title, start , end, editMode}) => {
-    console.log( e.target.matches('button.edit-item-btn'))
-
-    // if(e.target.matches('button.edit-item-btn')) {
-    //     editMode = true;
-    //     title = formTitle.value;
-    //     start = formStartField.value;
-    //     end = formEndField.value
-    //     modalContainer.classList.add("show");
-    //     console.log( title, start, end)
-    //
-    // }
-
-    console.log(title, start, end)
-    formTitle.value  = title;
-    formStartField.value = start;
-    formEndField.value =  end;
-    modalContainer.classList.add("show");
+const renderTaskList = () => {
+    while (listItems.children.length > 1) {
+        listItems.removeChild(listItems.lastChild);
+    }
+    taskList().map(item => {
+        render(item);
+    })
 }
 
 export const app = function app() {
     document.addEventListener('DOMContentLoaded', (e) => {
 
-        openModalBtn.addEventListener('click', (e) => openModalFunc({ e, title, start, end, editMode}));
+        openModalBtn.addEventListener('click', (e) => {
+            modalContainer.classList.add("show");
+            formTitle.value = '';
+            formStartField.value = defaultTime(formStartField);
+            formEndField.value =  defaultTime(formEndField);
+        });
 
-        taskListContainer.addEventListener('click', removeTask)
-        taskListContainer.addEventListener('click', (e) => editTask({e, openModalFunc}))
+        taskListContainer.addEventListener('click', (e) => editTask({e, taskList, setTaskList}))
+        taskListContainer.addEventListener('click', (e) => removeTask({e, taskList, setTaskList}))
         taskListContainer.addEventListener('click', crossTitle);
         closeModalBtn.addEventListener('click', closeModalFunc)
         form.addEventListener('submit', (e) => {
-            createTaskObj({e, formTitle, formEndField, editMode, formStartField, closeModalFunc})
+            createTaskObj({e, formTitle, formEndField, formStartField, taskList, setTaskList, closeModalFunc})
+            renderTaskList()
         })
 
     })
 }
-
 
