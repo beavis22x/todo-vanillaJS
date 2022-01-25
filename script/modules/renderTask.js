@@ -1,6 +1,6 @@
 import {listItems} from '../app.js';
 
-export const render = function renderTask({e, id, title, start, end, addSelector, edit}) {
+export const render = function renderTask({id, title, start, end}) {
     const elementItem = document.createElement('div');
     elementItem.classList.add('task-item');
 
@@ -22,14 +22,5 @@ export const render = function renderTask({e, id, title, start, end, addSelector
                 </div>
             </article>
         `;
-
-    // if(edit) {
-    //     addSelector.parentNode.after(elementItem) //addSelector.nextSibling.insertAdjacentHTML('beforebegin', elementItem)
-    //                                     // addSelector.parentNode.remove()
-    //     addSelector.parentNode.remove()
-    //     console.log(addSelector.parentNode)
-    //     console.log(addSelector)
-    // } else {
         listItems.append(elementItem);
-    // }
 }
