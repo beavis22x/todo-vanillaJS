@@ -9,7 +9,7 @@ const formattingTime = (str) => {
     return time
 }
 
-export const createTaskObj = function addTask({e, formTitle, formEndField, taskList, formStartField, taskListRender, closeModalFunc}) {
+export const createTaskObj = function addTask({e, formTitle, formEndField, taskList, setTaskList, formStartField, taskListRender, closeModalFunc}) {
     const id = taskId;
     const title = formTitle.value;
     const start = formattingTime(formStartField.value);
@@ -22,9 +22,11 @@ export const createTaskObj = function addTask({e, formTitle, formEndField, taskL
         completed: false,
         editMode:false,
     };
-    taskList.push(taskObj)
+
+    // taskList.push(taskObj)
+    setTaskList([...taskList(),taskObj])
     taskId++;
-    render({id, title, start, end});
+    // render({id, title, start, end});
     closeModalFunc(e)
 }
 
