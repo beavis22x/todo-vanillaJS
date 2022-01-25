@@ -44,7 +44,12 @@ button {
     padding: 10px;
 }
 
-.todos-header { font-weight: bold; }
+.todos-header span {
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.todos-header div:hover { opacity: 0.3}
 
 .todos-list { color: black; }
 

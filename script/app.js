@@ -4,6 +4,7 @@ import { crossTitle } from './modules/completedTask.js';
 import { removeTask } from './modules/removeTask.js';
 import { editTask } from './modules/editTask.js';
 import { render } from './modules/renderTask.js';
+import {filterTasks} from './modules/filterTasks.js';
 
 export const listItems = document.querySelector('.todos-list');
 const formTitle = document.querySelector('#form-title');
@@ -13,6 +14,7 @@ const openModalBtn = document.querySelector('#modal-open');
 const closeModalBtn = document.querySelector('#modal-close');
 const modalContainer = document.querySelector('.modal-container');
 const taskListContainer = document.querySelector('.todos-list');
+const taskHeaderContainer = document.querySelector('.todos-header');
 const form = document.querySelector('.modal-form');
 
 const useState = (defaultValue) => {
@@ -51,8 +53,9 @@ const renderTaskList = () => {
 export const app = function app() {
     document.addEventListener('DOMContentLoaded', (e) => {
 
+        taskHeaderContainer.addEventListener('click', (e) => filterTasks({e, taskList, setTaskList, renderTaskList}));
         openModalBtn.addEventListener('click', openModalFunc);
-        taskListContainer.addEventListener('click', (e) => editTask({e, taskList, setTaskList, modalContainer, renderTaskList, openModalFunc}));
+        taskListContainer.addEventListener('click', (e) => editTask({e, modalContainer, openModalFunc}));
         taskListContainer.addEventListener('click', (e) => removeTask({e, taskList, setTaskList, renderTaskList}));
         taskListContainer.addEventListener('click', crossTitle);
         closeModalBtn.addEventListener('click', closeModalFunc);
