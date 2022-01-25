@@ -23,10 +23,10 @@ export const createTaskObj = function addTask({e, formTitle, formEndField, taskL
         editMode:false,
     };
 
-    // taskList.push(taskObj)
+    if(title === '') return closeModalFunc(e)
+
     setTaskList([...taskList(),taskObj])
     taskId++;
-    // render({id, title, start, end});
     closeModalFunc(e)
 }
 

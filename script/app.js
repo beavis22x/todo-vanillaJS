@@ -12,7 +12,6 @@ const openModalBtn = document.querySelector('#modal-open');
 const closeModalBtn = document.querySelector('#modal-close');
 const modalContainer = document.querySelector('.modal-container');
 const taskListContainer = document.querySelector('.todos-list');
-const taskListHeader = document.querySelector('article.todos-header');
 const form = document.querySelector('.modal-form');
 
 const useState = (defaultValue) => {
