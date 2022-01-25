@@ -20,10 +20,18 @@ const useState = (defaultValue) => {
     let value = defaultValue;
     const getValue = () => value
     const setValue = newValue => value = newValue
+
     return [getValue, setValue];
 }
 
 const [taskList, setTaskList] = useState([]);
+
+const openModalFunc = ({e, title = '', start = defaultTime(formStartField), end = defaultTime(formEndField)}) => {
+    modalContainer.classList.add("show");
+    formTitle.value = title;
+    formStartField.value = start;
+    formEndField.value =  end;
+}
 
 const closeModalFunc = (e) => {
     e.preventDefault();
@@ -42,15 +50,11 @@ const renderTaskList = () => {
 export const app = function app() {
     document.addEventListener('DOMContentLoaded', (e) => {
 
-        openModalBtn.addEventListener('click', (e) => {
-            modalContainer.classList.add("show");
-            formTitle.value = '';
-            formStartField.value = defaultTime(formStartField);
-            formEndField.value =  defaultTime(formEndField);
-        });
+        openModalBtn.addEventListener('click', (e) => openModalFunc({e}));
 
-        taskListContainer.addEventListener('click', (e) => editTask({e, taskList, setTaskList}))
-        taskListContainer.addEventListener('click', (e) => removeTask({e, taskList, setTaskList}))
+
+        taskListContainer.addEventListener('click', (e) => editTask({e, taskList, setTaskList, renderTaskList}))
+        taskListContainer.addEventListener('click', (e) => removeTask({e, taskList, setTaskList, renderTaskList}))
         taskListContainer.addEventListener('click', crossTitle);
         closeModalBtn.addEventListener('click', closeModalFunc)
         form.addEventListener('submit', (e) => {

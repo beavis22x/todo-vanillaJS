@@ -1,7 +1,8 @@
 import {listItems} from '../app.js';
 
 export const render = function renderTask({e, id, title, start, end, addSelector, edit}) {
-    const elementItem = document.createElement('div')
+    const elementItem = document.createElement('div');
+    elementItem.classList.add('task-item');
 
     elementItem.innerHTML = `
             <article class='todos-item' id='${id}'>

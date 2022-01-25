@@ -2,21 +2,22 @@ import {render} from './renderTask.js';
 import {createTaskObj} from './createTask.js';
 // import {closeModalFunc} from '../app.js';
 //
-export const editTask = function editItem({e, taskList, setTaskList}) {
+export const editTask = function editItem({e, taskList, setTaskList, renderTaskList, openModalFunc}) {
     if (e.target?.matches('button.edit-item-btn')) {
 //         const editMode = true;
         const currentItem = e.target.parentElement.parentElement;
         const editId = Number(currentItem.getAttribute('id'));
-//         const formTitle = currentItem.children[1].lastElementChild.innerHTML;
-//         const formStartField = currentItem.children[2].lastElementChild.innerHTML;
-//         const formEndField = currentItem.children[3].lastElementChild.innerHTML;
-//         const selector = currentItem;
+        let formTitle = currentItem.children[1].lastElementChild.innerHTML;
+        let formStartField = currentItem.children[2].lastElementChild.innerHTML;
+        let formEndField = currentItem.children[3].lastElementChild.innerHTML;
+
+        openModalFunc({e, title:formTitle, start:formStartField, end: formEndField})
 //
-        setTaskList(taskList.map ((item) => {
+        setTaskList(taskList().map ((item) => {
             if (item.id === editId) {
-                return {...n, title: action.title}
+                return {...taskList(), id: editId, title: formTitle, start:formStartField, end:formEndField}
             }
-            return n;
+            return taskList();
         }))
 //         console.log(editId)
 //         openModalFunc({e, title:formTitle, start:formStartField, end: formEndField, editMode})
