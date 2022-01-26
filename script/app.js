@@ -57,6 +57,7 @@ export const app = function app() {
 
         taskHeaderContainer.addEventListener('click', (e) => filterTasks({e, taskList, setTaskList, renderTaskList}));
         openModalBtn.addEventListener('click', openModalFunc);
+        closeModalBtn.addEventListener('click', closeModalFunc);
         taskListContainer.addEventListener('click', (e) => editTask({
             e,
             EDIT_ATTRIBUTE,
@@ -65,7 +66,6 @@ export const app = function app() {
         }));
         taskListContainer.addEventListener('click', (e) => removeTask({e, taskList, setTaskList, renderTaskList}));
         taskListContainer.addEventListener('click', crossTitle);
-        closeModalBtn.addEventListener('click', closeModalFunc);
         form.addEventListener('submit', (e) => {
             const modalEditAttr = modalContainer.getAttribute(EDIT_ATTRIBUTE);
 
