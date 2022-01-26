@@ -1,9 +1,9 @@
-import { createTaskObj } from './modules/createTask.js';
-import { defaultTime } from './modules/setTime.js';
-import { crossTitle } from './modules/completedTask.js';
-import { removeTask } from './modules/removeTask.js';
-import { editTask } from './modules/editTask.js';
-import { render } from './modules/renderTask.js';
+import {createTaskObj} from './modules/createTask.js';
+import {defaultTime} from './modules/setTime.js';
+import {crossTitle} from './modules/completedTask.js';
+import {removeTask} from './modules/removeTask.js';
+import {editTask} from './modules/editTask.js';
+import {render} from './modules/renderTask.js';
 
 export const listItems = document.querySelector('.todos-list');
 const formTitle = document.querySelector('#form-title');
@@ -30,7 +30,7 @@ const [taskList, setTaskList] = useState([]);
 const openModalFunc = ({e, title = '', start = defaultTime(formStartField), end = defaultTime(formEndField)}) => {
     formTitle.value = title;
     formStartField.value = start;
-    formEndField.value =  end;
+    formEndField.value = end;
     modalContainer.classList.add(SHOW_CLASS);
 }
 
@@ -53,24 +53,29 @@ export const app = function app() {
     document.addEventListener('DOMContentLoaded', (e) => {
 
         openModalBtn.addEventListener('click', openModalFunc);
-        taskListContainer.addEventListener('click', (e) => editTask({e, EDIT_ATTRIBUTE, modalContainer, openModalFunc}));
+        taskListContainer.addEventListener('click', (e) => editTask({
+            e,
+            EDIT_ATTRIBUTE,
+            modalContainer,
+            openModalFunc
+        }));
         taskListContainer.addEventListener('click', (e) => removeTask({e, taskList, setTaskList, renderTaskList}));
         taskListContainer.addEventListener('click', crossTitle);
         closeModalBtn.addEventListener('click', closeModalFunc);
         form.addEventListener('submit', (e) => {
             const modalEditAttr = modalContainer.getAttribute(EDIT_ATTRIBUTE);
 
-            if(modalEditAttr) {
+            if (modalEditAttr) {
                 const id = Number(modalEditAttr);
                 const title = formTitle.value;
                 const start = formStartField.value;
                 const end = formEndField.value;
 
-                setTaskList(taskList().map(item => {
-                    return (item.id === id
+                setTaskList(taskList().map(item =>
+                    item.id === id
                         ? {...item, id, title, start, end}
-                        : item)
-                }));
+                        : item
+                ));
                 renderTaskList();
                 closeModalFunc(e);
             } else {
