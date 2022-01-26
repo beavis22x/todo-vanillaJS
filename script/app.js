@@ -67,7 +67,9 @@ export const app = function app() {
                 const end = formEndField.value;
 
                 setTaskList(taskList().map(item => {
-                    return (item.id === id ? {...item, id, title, start, end} : item)
+                    return (item.id === id
+                        ? {...item, id, title, start, end}
+                        : item)
                 }));
                 renderTaskList();
                 closeModalFunc(e);
