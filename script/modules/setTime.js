@@ -2,7 +2,7 @@ const formEndId = 'form-end';
 const msInDay = 86400000;
 const msInMinute = 60000;
 
-export const defaultTime = function setTime(element) {
+export const defaultTime = (element) => {
     let date = new Date();
 
     if (element.getAttribute('id') === formEndId) {
