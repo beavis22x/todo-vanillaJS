@@ -4,7 +4,6 @@ import { crossTitle } from './modules/completedTask.js';
 import { removeTask } from './modules/removeTask.js';
 import { editTask } from './modules/editTask.js';
 import { render } from './modules/renderTask.js';
-import {render} from './modules/renderTask.js';
 
 export const listItems = document.querySelector('.todos-list');
 const formTitle = document.querySelector('#form-title');
@@ -50,20 +49,11 @@ const renderTaskList = () => {
     })
 }
 
-const renderTaskList = () => {
-    while (listItems.children.length > 1) {
-        listItems.removeChild(listItems.lastChild);
-    }
-    taskList().map(item => {
-        render(item);
-    })
-}
-
 export const app = function app() {
     document.addEventListener('DOMContentLoaded', (e) => {
 
         openModalBtn.addEventListener('click', openModalFunc);
-        taskListContainer.addEventListener('click', (e) => editTask({e, taskList, setTaskList, modalContainer, renderTaskList, openModalFunc}));
+        taskListContainer.addEventListener('click', (e) => editTask({e, EDIT_ATTRIBUTE, modalContainer, openModalFunc}));
         taskListContainer.addEventListener('click', (e) => removeTask({e, taskList, setTaskList, renderTaskList}));
         taskListContainer.addEventListener('click', crossTitle);
         closeModalBtn.addEventListener('click', closeModalFunc);
