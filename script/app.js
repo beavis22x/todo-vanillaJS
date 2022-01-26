@@ -58,7 +58,7 @@ export const app = function app() {
         taskListContainer.addEventListener('click', crossTitle);
         closeModalBtn.addEventListener('click', closeModalFunc);
         form.addEventListener('submit', (e) => {
-            const modalEditAttr = modalContainer.getAttribute(EDIT_ATTRIBUTE)
+            const modalEditAttr = modalContainer.getAttribute(EDIT_ATTRIBUTE);
 
             if(modalEditAttr) {
                 const id = Number(modalEditAttr);
@@ -67,19 +67,15 @@ export const app = function app() {
                 const end = formEndField.value;
 
                 setTaskList(taskList().map(item => {
-                    if (item.id === id) {
-                        return {...item, id, title, start, end}
-                    }
-                    return item;
-                }))
+                    return (item.id === id ? {...item, id, title, start, end} : item)
+                }));
                 renderTaskList();
-                closeModalFunc(e)
+                closeModalFunc(e);
             } else {
-                createTaskObj({e, formTitle, formEndField, formStartField, taskList, setTaskList, closeModalFunc})
-                renderTaskList()
+                createTaskObj({e, formTitle, formEndField, formStartField, taskList, setTaskList, closeModalFunc});
+                renderTaskList();
             }
         })
-
     })
 }
 
