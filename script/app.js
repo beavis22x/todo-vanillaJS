@@ -16,13 +16,13 @@ const modalContainer = document.querySelector('.modal-container');
 const taskListContainer = document.querySelector('.todos-list');
 const taskHeaderContainer = document.querySelector('.todos-header');
 const form = document.querySelector('.modal-form');
-const SHOW_CLASS = 'show'
-const EDIT_ATTRIBUTE = 'data-edit'
+const SHOW_CLASS = 'show';
+const EDIT_ATTRIBUTE = 'data-edit';
 
 const useState = (defaultValue) => {
     let value = defaultValue;
-    const getValue = () => value
-    const setValue = newValue => value = newValue
+    const getValue = () => value;
+    const setValue = newValue => value = newValue;
 
     return [getValue, setValue];
 }
@@ -38,18 +38,15 @@ const openModalFunc = ({e, title = '', start = defaultTime(formStartField), end 
 
 const closeModalFunc = (e) => {
     e.preventDefault();
-    modalContainer.classList.remove(SHOW_CLASS)
-    modalContainer.removeAttribute(EDIT_ATTRIBUTE)
+    modalContainer.classList.remove(SHOW_CLASS);
+    modalContainer.removeAttribute(EDIT_ATTRIBUTE);
 }
 
 const renderTaskList = () => {
     while (listItems?.children.length > 1) {
         listItems.removeChild(listItems.lastChild);
     }
-    console.log(taskList())
-    taskList().map(item => {
-        render(item);
-    })
+    taskList().map(item => render(item));
 }
 
 export const app = function app() {
@@ -86,8 +83,7 @@ export const app = function app() {
                 createTaskObj({e, formTitle, formEndField, formStartField, taskList, setTaskList, closeModalFunc});
                 renderTaskList();
             }
-        })
-
-    })
+        });
+    });
 }
 
