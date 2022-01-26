@@ -14,6 +14,8 @@ const closeModalBtn = document.querySelector('#modal-close');
 const modalContainer = document.querySelector('.modal-container');
 const taskListContainer = document.querySelector('.todos-list');
 const form = document.querySelector('.modal-form');
+const SHOW_CLASS = 'show'
+const EDIT_ATTRIBUTE = 'data-edit'
 
 const useState = (defaultValue) => {
     let value = defaultValue;
@@ -29,20 +31,19 @@ const openModalFunc = ({e, title = '', start = defaultTime(formStartField), end 
     formTitle.value = title;
     formStartField.value = start;
     formEndField.value =  end;
-    modalContainer.classList.add("show");
+    modalContainer.classList.add(SHOW_CLASS);
 }
 
 const closeModalFunc = (e) => {
     e.preventDefault();
-    modalContainer.classList.remove("show")
-    modalContainer.removeAttribute('data-edit')
+    modalContainer.classList.remove(SHOW_CLASS)
+    modalContainer.removeAttribute(EDIT_ATTRIBUTE)
 }
 
 const renderTaskList = () => {
-    while (listItems.children.length > 1) {
+    while (listItems?.children.length > 1) {
         listItems.removeChild(listItems.lastChild);
     }
-    console.log(taskList())
     taskList().map(item => {
         render(item);
     })
@@ -57,7 +58,7 @@ export const app = function app() {
         taskListContainer.addEventListener('click', crossTitle);
         closeModalBtn.addEventListener('click', closeModalFunc);
         form.addEventListener('submit', (e) => {
-            const modalEditAttr = modalContainer.getAttribute('data-edit')
+            const modalEditAttr = modalContainer.getAttribute(EDIT_ATTRIBUTE)
 
             if(modalEditAttr) {
                 const id = Number(modalEditAttr);

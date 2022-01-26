@@ -1,19 +1,14 @@
 let taskId = 1;
 
-// const formattingTime = (str) => {
-//     let time = str.slice(0, 10)
-//     time = `${time.slice(8, 10)}-${time.slice(5, 7)}-${time.slice(0, 4)}`
-//
-//     return time
-// }
-
 export const createTaskObj = function addTask({e, formTitle, formEndField, taskList, setTaskList, formStartField, closeModalFunc}) {
-    const id = taskId;
-    const title = formTitle.value;
-    const start = formStartField.value;
-    const end = formEndField.value;
+    const {
+        formTitle: {value: title},
+        formStartField: {value: start},
+        formEndField: {value: end}
+    } = {formTitle, formStartField, formEndField}
+
     const taskObj = {
-        id,
+        id: taskId,
         title,
         start,
         end,
