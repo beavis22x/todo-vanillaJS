@@ -4,6 +4,7 @@ import { crossTitle } from './modules/completedTask.js';
 import { removeTask } from './modules/removeTask.js';
 import { editTask } from './modules/editTask.js';
 import { render } from './modules/renderTask.js';
+import {render} from './modules/renderTask.js';
 
 export const listItems = document.querySelector('.todos-list');
 const formTitle = document.querySelector('#form-title');
@@ -43,6 +44,15 @@ const renderTaskList = () => {
         listItems.removeChild(listItems.lastChild);
     }
     console.log(taskList())
+    taskList().map(item => {
+        render(item);
+    })
+}
+
+const renderTaskList = () => {
+    while (listItems.children.length > 1) {
+        listItems.removeChild(listItems.lastChild);
+    }
     taskList().map(item => {
         render(item);
     })
