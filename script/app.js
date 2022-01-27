@@ -62,7 +62,7 @@ export const app = function app() {
             openModalFunc
         }));
         taskListContainer.addEventListener('click', (e) => removeTask({e, taskList, setTaskList, renderTaskList}));
-        taskListContainer.addEventListener('click', crossTitle);
+        taskListContainer.addEventListener('click', (e) => crossTitle({e, taskList, setTaskList}));
         form.addEventListener('submit', (e) => {
             const modalEditAttr = modalContainer.getAttribute(EDIT_ATTRIBUTE);
 
