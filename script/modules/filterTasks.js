@@ -3,50 +3,38 @@ export const filterTasks = function ({e, taskList, setTaskList, renderTaskList})
     const START = 'start-time-header';
     const END = 'end-time-header';
 
-    // const compare = function (property) {
-    //     taskList().sort((a, b) => {
-    //         return a.property - b.property;
-    //     });
-    // }
+    const sortDateFn = (sortName) => {
+        setTaskList(taskList().sort((a, b) => {
+            let da = new Date(a[sortName]),
+                db = new Date(b[sortName]);
+            return da - db;
+        }));
+    };
 
-    if (e.target?.matches('span') && !(e.target?.matches('.done-header'))) {
+    if (e.target?.matches('span')) {
+        const selectedSelector = e.target.closest('div').className;
 
-        const selectedSelector = e.target.closest('div').className
         switch (selectedSelector) {
             case TITLE: {
                 setTaskList(taskList().sort((a, b) => {
-                    let fa = a.title.toLowerCase(),
-                        fb = b.title.toLowerCase();
-
-                    if (fa < fb) {
-                        return -1;
-                    }
-                    if (fa > fb) {
-                        return 1;
-                    }
-                    return 0;
+                    const firstObj = (typeof a.title === 'string') ? a.title.replace(/\s+/g, '').toLowerCase() : a.title;
+                    const secondObj = (typeof b.title === 'string') ? b.title.replace(/\s+/g, '').toLowerCase() : a.title;
+                    console.log(firstObj, secondObj);
+                    return firstObj < secondObj ? -1 : 1;
                 }));
                 break;
             }
             case START: {
-                setTaskList(taskList().sort((a, b) => {
-                    let da = new Date(a.start),
-                        db = new Date(b.start);
-                    return da - db;
-                }))
+                sortDateFn("start");
                 break;
             }
             case END: {
-                setTaskList(taskList().sort((a, b) => {
-                    let da = new Date(a.end),
-                        db = new Date(b.end);
-                    return da - db;
-                }))
+                sortDateFn("end");
                 break;
             }
         }
         renderTaskList();
     }
-}
+};
 
 
