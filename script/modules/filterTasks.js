@@ -35,15 +35,17 @@ export const filterTasks = function ({e, taskList, setTaskList, renderTaskList})
             }
             case COMPLETED: {
                 const firstTaskSelected = taskList()[0].completed;
+                const completedSortFn = (flag = false) => {
+                    const startArr = [...taskList().filter((item) => item.completed === flag)];
+                    const endArr = [...taskList().filter((item) => item.completed === !flag)];
+
+                    setTaskList([...startArr,...endArr]);
+                }
 
                 if(firstTaskSelected) {
-                    setTaskList([
-                        ...taskList().filter((item) => item.completed === false),
-                        ...taskList().filter((item) => item.completed === true)])
+                    completedSortFn();
                 } else {
-                    setTaskList([
-                        ...taskList().filter((item) => item.completed === true),
-                        ...taskList().filter((item) => item.completed === false)])
+                    completedSortFn(true);
                 }
                 break;
             }
