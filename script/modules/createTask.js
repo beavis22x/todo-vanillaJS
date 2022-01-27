@@ -19,7 +19,7 @@ export const createTaskObj = ({
         editMode: false,
     };
 
-    if (title === '') return closeModalFunc(e);
+    if (title === '') return;
 
     setTaskList([...taskList(), taskObj]);
     taskId++;
