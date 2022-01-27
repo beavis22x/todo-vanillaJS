@@ -19,7 +19,7 @@ export const filterTasks = function ({e, taskList, setTaskList, renderTaskList})
                 setTaskList(taskList().sort((a, b) => {
                     const firstObj = (typeof a.title === 'string') ? a.title.replace(/\s+/g, '').toLowerCase() : a.title;
                     const secondObj = (typeof b.title === 'string') ? b.title.replace(/\s+/g, '').toLowerCase() : a.title;
-                    console.log(firstObj, secondObj);
+
                     return firstObj < secondObj ? -1 : 1;
                 }));
                 break;
