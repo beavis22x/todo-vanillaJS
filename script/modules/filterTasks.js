@@ -34,13 +34,17 @@ export const filterTasks = function ({e, taskList, setTaskList, renderTaskList})
                 break;
             }
             case COMPLETED: {
-                setTaskList(taskList().sort((a,b) => {
-                    if(a.completed) {
-                        return a.completed > b.completed ? -1 : 1
-                    } else {
-                        return a.completed < b.completed ? -1 : 1
-                    }
-                }));
+                const firstTaskSelected = taskList()[0].completed;
+
+                if(firstTaskSelected) {
+                    setTaskList([
+                        ...taskList().filter((item) => item.completed === false),
+                        ...taskList().filter((item) => item.completed === true)])
+                } else {
+                    setTaskList([
+                        ...taskList().filter((item) => item.completed === true),
+                        ...taskList().filter((item) => item.completed === false)])
+                }
                 break;
             }
         }
