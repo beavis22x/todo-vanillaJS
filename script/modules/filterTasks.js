@@ -2,6 +2,7 @@ export const filterTasks = function ({e, taskList, setTaskList, renderTaskList})
     const TITLE = 'title-header';
     const START = 'start-time-header';
     const END = 'end-time-header';
+    const COMPLETED = 'done-header';
 
     const sortDateFn = (sortName) => {
         setTaskList(taskList().sort((a, b) => {
@@ -30,6 +31,16 @@ export const filterTasks = function ({e, taskList, setTaskList, renderTaskList})
             }
             case END: {
                 sortDateFn("end");
+                break;
+            }
+            case COMPLETED: {
+                setTaskList(taskList().sort((a,b) => {
+                    if(a.completed) {
+                        return a.completed > b.completed ? -1 : 1
+                    } else {
+                        return a.completed < b.completed ? -1 : 1
+                    }
+                }));
                 break;
             }
         }

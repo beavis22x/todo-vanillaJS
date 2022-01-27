@@ -48,12 +48,9 @@ button {
     font-weight: bold;
 }
 
-.todos-header span {
-    cursor: pointer;
-}
-
-.todos-header span:hover {
+.todos-header div:hover {
     opacity: 0.3;
+    cursor: pointer;
 }
 
 .todos-list {
