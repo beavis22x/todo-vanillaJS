@@ -2,8 +2,8 @@ import {listItems} from '../app.js';
 
 export const render = ({id, title, start, end, completed}) => {
     const elementItem = document.createElement('div');
-    elementItem.classList.add('task-item');
 
+    elementItem.classList.add('task-item');
     elementItem.innerHTML = `
             <article class='todos-item' id='${id} '>
                 <input type='checkbox'>
@@ -23,8 +23,9 @@ export const render = ({id, title, start, end, completed}) => {
             </article>
         `;
         if(completed) {
-            const checkbox = elementItem.querySelector('[type=checkbox]')
-            checkbox.setAttribute('disabled', 'disabled')
+            const checkbox = elementItem.querySelector('[type=checkbox]');
+
+            checkbox.setAttribute('disabled', 'disabled');
             checkbox.setAttribute('checked', 'checked');
         }
 

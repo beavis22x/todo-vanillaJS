@@ -46,7 +46,7 @@ const renderTaskList = () => {
     while (listItems?.children.length > 1) {
         listItems.removeChild(listItems.lastChild);
     }
-    taskList().map(item => render(item));
+    taskList().map(render);
 }
 
 export const app = function app() {
