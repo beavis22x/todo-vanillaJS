@@ -1,15 +1,67 @@
-export const filterTasks = function ({e, taskList, setTaskList, renderTaskList}) {
+export const filterTasks = ({
+                                e,
+                                taskList,
+                                setTaskList,
+                                titleDir,
+                                setTitleDir,
+                                renderTaskList,
+                                startDir,
+                                setStartDir,
+                                endDir,
+                                setEndDir
+                            }) => {
     const TITLE = 'title-header';
     const START = 'start-time-header';
     const END = 'end-time-header';
     const COMPLETED = 'done-header';
 
-    const sortDateFn = (sortName) => {
+
+    const sortDate = (sortName, dir, dirSetter) => {
         setTaskList(taskList().sort((a, b) => {
-            let da = new Date(a[sortName]),
-                db = new Date(b[sortName]);
-            return da - db;
+            let dateLeftObj = new Date(a[sortName]),
+                dateRightObj = new Date(b[sortName]);
+
+            if (dir()) {
+                return dateRightObj - dateLeftObj;
+            } else {
+                return dateLeftObj - dateRightObj;
+            }
         }));
+        dirSetter(!dir());
+    };
+
+    const sortTitle = () => {
+        setTaskList(taskList().sort((a, b) => {
+            const firstObj = (typeof a.title === 'string')
+                ? a.title.replace(/\s+/g, '').toLowerCase()
+                : a.title;
+            const secondObj = (typeof b.title === 'string')
+                ? b.title.replace(/\s+/g, '').toLowerCase()
+                : a.title;
+
+            if (titleDir()) {
+                return firstObj > secondObj ? -1 : 1;
+            } else {
+                return firstObj < secondObj ? -1 : 1;
+            }
+        }));
+        setTitleDir(!titleDir());
+    };
+
+    const sortCompleted = () => {
+        const firstTaskSelected = taskList()[0].completed;
+        const startArr = [];
+        const endArr = [];
+
+        taskList().map(item => {
+            item.completed
+                ? startArr.push(item)
+                : endArr.push(item);
+        });
+
+        firstTaskSelected
+            ? setTaskList([...startArr, ...endArr].reverse())
+            : setTaskList([...startArr, ...endArr]);
     };
 
     if (e.target?.matches('span')) {
@@ -17,36 +69,19 @@ export const filterTasks = function ({e, taskList, setTaskList, renderTaskList})
 
         switch (selectedSelector) {
             case TITLE: {
-                setTaskList(taskList().sort((a, b) => {
-                    const firstObj = (typeof a.title === 'string') ? a.title.replace(/\s+/g, '').toLowerCase() : a.title;
-                    const secondObj = (typeof b.title === 'string') ? b.title.replace(/\s+/g, '').toLowerCase() : a.title;
-
-                    return firstObj < secondObj ? -1 : 1;
-                }));
+                sortTitle();
                 break;
             }
             case START: {
-                sortDateFn("start");
+                sortDate("start", startDir, setStartDir);
                 break;
             }
             case END: {
-                sortDateFn("end");
+                sortDate("end", endDir, setEndDir);
                 break;
             }
             case COMPLETED: {
-                const firstTaskSelected = taskList()[0].completed;
-                const completedSortFn = (flag = false) => {
-                    const startArr = [...taskList().filter((item) => item.completed === flag)];
-                    const endArr = [...taskList().filter((item) => item.completed === !flag)];
-
-                    setTaskList([...startArr,...endArr]);
-                }
-
-                if(firstTaskSelected) {
-                    completedSortFn();
-                } else {
-                    completedSortFn(true);
-                }
+                sortCompleted();
                 break;
             }
         }

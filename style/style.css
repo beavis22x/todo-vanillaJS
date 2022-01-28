@@ -127,6 +127,11 @@ button:hover {
     color: #eae7e6;
 }
 
+.edit-item-btn:disabled:hover {
+    opacity: 1;
+    background-color: #989292;
+}
+
 .edit-item-btn {
     border-radius: 25%;
 }

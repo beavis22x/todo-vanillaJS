@@ -1,10 +1,10 @@
-import { createTaskObj } from './modules/createTask.js';
-import { defaultTime } from './modules/setTime.js';
-import { crossTitle } from './modules/completedTask.js';
-import { removeTask } from './modules/removeTask.js';
-import { editTask } from './modules/editTask.js';
-import { render } from './modules/renderTask.js';
-import { filterTasks } from './modules/filterTasks.js';
+import {createTaskObj} from './modules/createTask.js';
+import {defaultTime} from './modules/setTime.js';
+import {crossTitle} from './modules/completedTask.js';
+import {removeTask} from './modules/removeTask.js';
+import {editTask} from './modules/editTask.js';
+import {render} from './modules/renderTask.js';
+import {filterTasks} from './modules/filterTasks.js';
 
 export const listItems = document.querySelector('.todos-list');
 const formTitle = document.querySelector('#form-title');
@@ -25,44 +25,67 @@ const useState = (defaultValue) => {
     const setValue = newValue => value = newValue;
 
     return [getValue, setValue];
-}
+};
 
 const [taskList, setTaskList] = useState([]);
+const [titleDir, setTitleDir] = useState(false);
+const [startDir, setStartDir] = useState(false);
+const [endDir, setEndDir] = useState(false);
 
-const openModalFunc = ({e, title = '', start = defaultTime(formStartField), end = defaultTime(formEndField)}) => {
+const openModal = ({e, title = '', start = defaultTime(formStartField), end = defaultTime(formEndField)}) => {
     formTitle.value = title;
     formStartField.value = start;
     formEndField.value = end;
     modalContainer.classList.add(SHOW_CLASS);
-}
+};
 
-const closeModalFunc = (e) => {
+const closeModal = (e) => {
     e.preventDefault();
     modalContainer.classList.remove(SHOW_CLASS);
     modalContainer.removeAttribute(EDIT_ATTRIBUTE);
-}
+};
 
 const renderTaskList = () => {
     while (listItems?.children.length > 1) {
         listItems.removeChild(listItems.lastChild);
     }
     taskList().map(render);
-}
+};
 
 export const app = function app() {
     document.addEventListener('DOMContentLoaded', (e) => {
 
-        taskHeaderContainer.addEventListener('click', (e) => filterTasks({e, taskList, setTaskList, renderTaskList}));
-        openModalBtn.addEventListener('click', openModalFunc);
-        closeModalBtn.addEventListener('click', closeModalFunc);
+        taskHeaderContainer.addEventListener('click', (e) => filterTasks({
+            e,
+            taskList,
+            setTaskList,
+            titleDir,
+            setTitleDir,
+            startDir,
+            setStartDir,
+            endDir,
+            setEndDir,
+            useState,
+            renderTaskList
+        }));
+
         taskListContainer.addEventListener('click', (e) => editTask({
             e,
             EDIT_ATTRIBUTE,
             modalContainer,
-            openModalFunc
+            openModal
         }));
-        taskListContainer.addEventListener('click', (e) => removeTask({e, taskList, setTaskList, renderTaskList}));
+
+        taskListContainer.addEventListener('click', (e) => removeTask({
+            e,
+            taskList,
+            setTaskList,
+            renderTaskList
+        }));
+
         taskListContainer.addEventListener('click', (e) => crossTitle({e, taskList, setTaskList}));
+        openModalBtn.addEventListener('click', openModal);
+        closeModalBtn.addEventListener('click', closeModal);
         form.addEventListener('submit', (e) => {
             const modalEditAttr = modalContainer.getAttribute(EDIT_ATTRIBUTE);
 
@@ -78,12 +101,20 @@ export const app = function app() {
                         : item
                 ));
                 renderTaskList();
-                closeModalFunc(e);
+                closeModal(e);
             } else {
-                createTaskObj({e, formTitle, formEndField, formStartField, taskList, setTaskList, closeModalFunc});
+                createTaskObj({
+                    e,
+                    formTitle,
+                    formEndField,
+                    formStartField,
+                    taskList,
+                    setTaskList,
+                    closeModal
+                });
                 renderTaskList();
             }
         });
     });
-}
+};
 

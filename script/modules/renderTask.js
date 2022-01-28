@@ -24,9 +24,11 @@ export const render = ({id, title, start, end, completed}) => {
         `;
         if(completed) {
             const checkbox = elementItem.querySelector('[type=checkbox]');
+            const editBtn = elementItem.querySelector('.edit-item-btn');
 
             checkbox.setAttribute('disabled', 'disabled');
             checkbox.setAttribute('checked', 'checked');
+            editBtn.setAttribute('disabled', 'disabled');
         }
 
         listItems.append(elementItem);
