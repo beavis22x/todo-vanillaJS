@@ -28,11 +28,11 @@ const useState = (defaultValue) => {
 };
 
 const [taskList, setTaskList] = useState([]);
-const [titleDir, setTitleDir] = useState(false);
-const [startDir, setStartDir] = useState(false);
-const [endDir, setEndDir] = useState(false);
+const [titleDir, setTitleDir] = useState(true);
+const [startDir, setStartDir] = useState(true);
+const [endDir, setEndDir] = useState(true);
 
-const openModal = ({e, title = '', start = defaultTime(formStartField), end = defaultTime(formEndField)}) => {
+const openModal = ({title = '', start = defaultTime(formStartField), end = defaultTime(formEndField)}) => {
     formTitle.value = title;
     formStartField.value = start;
     formEndField.value = end;
@@ -53,7 +53,7 @@ const renderTaskList = () => {
 };
 
 export const app = function app() {
-    document.addEventListener('DOMContentLoaded', (e) => {
+    document.addEventListener('DOMContentLoaded', () => {
 
         taskHeaderContainer.addEventListener('click', (e) => filterTasks({
             e,

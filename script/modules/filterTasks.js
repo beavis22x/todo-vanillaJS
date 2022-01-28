@@ -15,16 +15,15 @@ export const filterTasks = ({
     const END = 'end-time-header';
     const COMPLETED = 'done-header';
 
-
     const sortDate = (sortName, dir, dirSetter) => {
         setTaskList(taskList().sort((a, b) => {
-            let dateLeftObj = new Date(a[sortName]),
-                dateRightObj = new Date(b[sortName]);
+            let dateLeftObj = new Date(a[sortName]);
+            let dateRightObj = new Date(b[sortName]);
 
             if (dir()) {
-                return dateRightObj - dateLeftObj;
-            } else {
                 return dateLeftObj - dateRightObj;
+            } else {
+                return dateRightObj - dateLeftObj;
             }
         }));
         dirSetter(!dir());
