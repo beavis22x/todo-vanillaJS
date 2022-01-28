@@ -4,7 +4,7 @@ export const createTaskObj = ({
                                   e,
                                   setTaskList,
                                   taskList,
-                                  closeModalFunc,
+                                  closeModal,
                                   formTitle: {value: title},
                                   formStartField: {value: start},
                                   formEndField: {value: end},
@@ -19,11 +19,11 @@ export const createTaskObj = ({
         editMode: false,
     };
 
-    if (title === '') return closeModalFunc(e)
+    if (title === '') return alert('Fill title');
 
-    setTaskList([...taskList(), taskObj])
+    setTaskList([...taskList(), taskObj]);
     taskId++;
-    closeModalFunc(e)
+    closeModal(e);
 }
 
 
